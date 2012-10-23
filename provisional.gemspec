@@ -12,6 +12,8 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{When a method is provisioned, any call to that method is passed through a provisional filter that can stop the method execution and perform some actions}
   gem.homepage      = ""
 
+  gem.add_development_dependency "rspec"
+
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
