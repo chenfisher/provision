@@ -76,7 +76,6 @@ describe Provisional do
 
 	it "should take a block as an action when provision fails" do
 		@meta.provision :a_method, :with => lambda{ false } do
-			puts self
 			'hi there'
 		end
 

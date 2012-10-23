@@ -16,7 +16,7 @@ module Provisional
 		# calls the original method only if the hooked method returns true
 		# usage:
 		# 	hook :method1, :method2, :before => :method_name
-		def hook(*args)
+		def hook(*args, &block)
 			hooks = args.last.is_a?(::Hash) ? args.pop : {}
 
 			args.each do |method|
@@ -35,7 +35,14 @@ module Provisional
 							hook_instance(hooks[:before], *a)
 						end
 
-					return yield if block_given?
+ 					if block_given?
+						if block.arity == 0
+							return yield
+						else
+							return yield(self, *a)
+						end
+					end
+
 					false
 				end
 			end
