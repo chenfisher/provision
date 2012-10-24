@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["chen.fisher@gmail.com"]
   gem.description   = %q{Lets one hook a provision for a method}
   gem.summary       = %q{When a method is provisioned, any call to that method is passed through a provisional filter that can stop the method execution and perform some actions}
-  gem.homepage      = "git@github.com:chenfisher/provisional.git"
+  gem.homepage      = "https://github.com/chenfisher/provisional"
 
   gem.add_development_dependency "rspec"
 
