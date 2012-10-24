@@ -24,9 +24,23 @@ describe Provisional do
 	end
 
 	it "should provision a method using a class name" do
-		class ThisClass; end
-		ThisClass.any_instance.stub(:provision!).and_return false
-		ThisClass.any_instance.should_receive(:provision!)
+		class ThisClass; 
+			def provision!(sender)
+				false
+			end
+		end
+		
+		@meta.provision :a_method, :with => ThisClass
+
+		@sample.a_method.should_not eq 'hello'
+	end
+
+	it "should provision a method using a class name with class method provision!" do
+		class ThisClass; 
+			def self.provision!(sender)
+				false
+			end
+		end
 		
 		@meta.provision :a_method, :with => ThisClass
 

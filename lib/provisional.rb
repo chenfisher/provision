@@ -57,7 +57,11 @@ module Provisional
 		end
 
 		def hook_class(h, *a)
-			h.new.provision!(self, *a)
+			if h.respond_to? :provision!
+				h.provision!(self, *a)
+			else
+				h.new.provision!(self, *a)
+			end
 		end
 
 		def hook_instance(h, *a)
