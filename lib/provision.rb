@@ -1,6 +1,6 @@
-require "provisional/version"
+require "provision/version"
 
-module Provisional
+module Provision
 	module ClassMethods
 
 		##

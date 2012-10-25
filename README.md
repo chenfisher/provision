@@ -1,15 +1,15 @@
-# Provisional
+# Provision
 
-The provisional gem lets you hook a provisional filter to a method. **ANY method**.
+The provision gem lets you hook a provision filter to a method. **ANY method**.
 
 For example, 
 Lets say we have an article website, where users can post articles.
 
 We want to limit the number of articles a user can post to our website, based on a primium account. For example, if the user is using the free version he can post up to 5 articles, when a user that has paid and is using the pro account, can post up to 20 articles.
 
-This is where 'provisional' comes in. It makes it easy and dry to do provisions on your website.
+This is where 'provision' comes in. It makes it easy and dry to do provisions on your website.
 
-The great thing about **provisional** is that it can act on any level - model, controller or any other class you have.
+The great thing about **provision** is that it can act on any level - model, controller or any other class you have.
 Think of it as ActiveRecord's **validate** and Controller's **before_filter** combined and available on any class and method. 
 
 
@@ -17,7 +17,7 @@ Think of it as ActiveRecord's **validate** and Controller's **before_filter** co
 
 Add this line to your application's Gemfile:
 
-    gem 'provisional'
+    gem 'provision'
 
 And then execute:
 
@@ -25,7 +25,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install provisional
+    $ gem install provision
 
 ## Usage
 When a method is provisioned, whenever it is called, the provision method comes into action.
@@ -74,7 +74,7 @@ where **sender** is the instance of SomeClass and ***args** are the arguments pa
 		provision :a_method, :with => ProvisionClass
 	end
 
-**NOTE**: provisional will try to call `ProvisionClass.provision!` (a class method); if the class does not respond to provision! then
+**NOTE**: provision will try to call `ProvisionClass.provision!` (a class method); if the class does not respond to provision! then
 it will create an instance of ProvisionClass and then call `provision!` (mind the bang!)
 
 	class ProvisionClass
@@ -86,7 +86,7 @@ it will create an instance of ProvisionClass and then call `provision!` (mind th
 **sender** is the instance of SomeClass and ***args** are the arguments passed to the original method
 
 ### Provision using an instance of a class
-when the **lambda** block return something other than *true* or *false* then provisional assumes it returns an instance
+when the **lambda** block return something other than *true* or *false* then provision assumes it returns an instance
 of a class that responds to **provision!**
 
 	provision :a_method, :with => lambda{ |sender, *args| ProvisionClass.new(sender, *args) }
@@ -116,7 +116,7 @@ Lets provision a user on the number of posts they can post. We can do this on th
 
 #### Controller level example:
 	class PostsController < ApplicationController
-		include Provisional
+		include provision
 
 		def create
 			# create the post
@@ -136,7 +136,7 @@ Lets provision a user on the number of posts they can post. We can do this on th
 
 #### Model level example:
 	class Post < ActiveRecord::Base
-		include Provisional
+		include provision
 
 		provision :save, :valid?, :with => lambda{ |post| post.user.post_count < MAX_COUNT } do |post|
 			post.errors[:count] = "you have maxed out you post count"

@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'provisional/sample'
+require 'provision/sample'
 
-describe Provisional do
+describe Provision do
 
 	before :each do
 		@sample = Sample.new
